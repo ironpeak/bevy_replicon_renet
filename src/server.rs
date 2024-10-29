@@ -23,7 +23,7 @@ impl Plugin for RepliconRenetServerPlugin {
                 (
                     (
                         Self::set_running.run_if(resource_added::<RenetServer>),
-                        Self::set_stopped.run_if(resource_removed::<RenetServer>()),
+                        Self::set_stopped.run_if(resource_removed::<RenetServer>),
                         Self::receive_packets.run_if(resource_exists::<RenetServer>),
                     )
                         .chain()
