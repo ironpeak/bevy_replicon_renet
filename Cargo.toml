@@ -26,11 +26,11 @@ all-features = true
 
 [dependencies]
 bevy_replicon = { version = "0.32", default-features = false }
-bevy_renet = { version = "1.0", default-features = false }
-bevy = { version = "0.15", default-features = false }
+bevy_renet = { version = "1", default-features = false }
+bevy = { version = "0.16", default-features = false }
 
 [dev-dependencies]
-bevy = { version = "0.15", default-features = false, features = [
+bevy = { version = "0.16", default-features = false, features = [
   "bevy_text",
   "bevy_ui",
   "bevy_gizmos",
@@ -39,8 +39,8 @@ bevy = { version = "0.15", default-features = false, features = [
   "x11",
   "default_font",
 ] }
-serde = "1.0"
-clap = { version = "4.1", features = ["derive"] }
+serde = "1"
+clap = { version = "4", features = ["derive"] }
 
 [features]
 default = ["client", "server", "renet_netcode"]
@@ -61,4 +61,9 @@ required-features = ["server", "client", "renet_netcode"]
 
 [[example]]
 name = "tic_tac_toe"
-required-features = ["server", "client", "renet_netcode"]
+required-features = ["server", "client", "bevy_picking", "renet_netcode"]
+
+[patch.crates-io]
+bevy_replicon = { git = "https://github.com/ironpeak/bevy_replicon", rev = "91b8c79ada126026b0910a20865678c5f356f57a" }
+bevy_renet = { git = "https://github.com/ironpeak/renet", rev = "104234894281830a197b8960e589fce9a42a891e" }
+renet = { git = "https://github.com/ironpeak/renet", rev = "104234894281830a197b8960e589fce9a42a891e" }

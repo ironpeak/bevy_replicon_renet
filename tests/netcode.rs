@@ -91,7 +91,8 @@ fn replication() {
     client_app
         .world_mut()
         .query::<&Replicated>()
-        .single(client_app.world());
+        .single(client_app.world())
+        .unwrap();
 }
 
 #[test]
