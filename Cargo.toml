@@ -64,6 +64,6 @@ name = "tic_tac_toe"
 required-features = ["server", "client", "bevy_picking", "renet_netcode"]
 
 [patch.crates-io]
-bevy_replicon = { git = "https://github.com/ironpeak/bevy_replicon", rev = "f57aec28d276838cda1b7d309a6932487b75b6cd" }
-bevy_renet = { git = "https://github.com/ironpeak/renet", rev = "06a4cd8c8542028efa886c4cc14b9576d69f7135" }
-renet = { git = "https://github.com/ironpeak/renet", rev = "06a4cd8c8542028efa886c4cc14b9576d69f7135" }
+bevy_replicon = { git = "https://github.com/ironpeak/bevy_replicon", rev = "cd6070690863865359c6d069c9b4e13586b6c31c" }
+bevy_renet = { git = "https://github.com/ironpeak/renet", rev = "cd33e4ed700b106eb64e380a9930cd47b737b610" }
+renet = { git = "https://github.com/ironpeak/renet", rev = "cd33e4ed700b106eb64e380a9930cd47b737b610" }
