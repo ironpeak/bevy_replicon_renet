@@ -14,6 +14,7 @@ use bevy_renet::{
 use bevy_replicon::prelude::*;
 use bevy_replicon_renet::{RenetChannelsExt, RepliconRenetPlugins};
 use serde::{Deserialize, Serialize};
+use test_log::test;
 
 #[test]
 fn connect_disconnect() {
@@ -88,11 +89,8 @@ fn replication() {
     server_app.update();
     client_app.update();
 
-    client_app
-        .world_mut()
-        .query::<&Replicated>()
-        .single(client_app.world())
-        .unwrap();
+    let mut replicated = client_app.world_mut().query::<&Replicated>();
+    assert_eq!(replicated.iter(client_app.world()).len(), 1);
 }
 
 #[test]

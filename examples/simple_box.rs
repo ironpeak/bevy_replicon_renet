@@ -2,7 +2,6 @@
 //! Also demonstrates the single-player and how sever also could be a player.
 
 use std::{
-    error::Error,
     hash::{DefaultHasher, Hash, Hasher},
     net::{IpAddr, Ipv4Addr, SocketAddr, UdpSocket},
     time::SystemTime,
@@ -33,35 +32,19 @@ fn main() {
             focused_mode: Continuous,
             unfocused_mode: Continuous,
         })
-        .add_plugins((
-            DefaultPlugins,
-            RepliconPlugins,
-            RepliconRenetPlugins,
-            SimpleBoxPlugin,
-        ))
+        .add_plugins((DefaultPlugins, RepliconPlugins, RepliconRenetPlugins))
+        .replicate::<BoxPosition>()
+        .replicate::<PlayerBox>()
+        .add_client_trigger::<MoveBox>(Channel::Ordered)
+        .add_observer(spawn_clients)
+        .add_observer(despawn_clients)
+        .add_observer(apply_movement)
+        .add_systems(Startup, (read_cli.map(Result::unwrap), spawn_camera))
+        .add_systems(Update, (read_input, draw_boxes))
         .run();
 }
 
-struct SimpleBoxPlugin;
-
-impl Plugin for SimpleBoxPlugin {
-    fn build(&self, app: &mut App) {
-        app.replicate::<BoxPosition>()
-            .replicate::<PlayerBox>()
-            .add_client_trigger::<MoveBox>(Channel::Ordered)
-            .add_observer(spawn_clients)
-            .add_observer(despawn_clients)
-            .add_observer(apply_movement)
-            .add_systems(Startup, (read_cli.map(Result::unwrap), spawn_camera))
-            .add_systems(Update, (read_input, draw_boxes));
-    }
-}
-
-fn read_cli(
-    mut commands: Commands,
-    cli: Res<Cli>,
-    channels: Res<RepliconChannels>,
-) -> Result<(), Box<dyn Error>> {
+fn read_cli(mut commands: Commands, cli: Res<Cli>, channels: Res<RepliconChannels>) -> Result<()> {
     const PROTOCOL_ID: u64 = 0;
 
     match *cli {
