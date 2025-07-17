@@ -25,8 +25,8 @@ rustdoc-args = ["-Zunstable-options", "--cfg", "docsrs"]
 all-features = true
 
 [dependencies]
-bevy_replicon = { version = "0.33", default-features = false }
-bevy_renet = { version = "1", default-features = false }
+bevy_replicon = { version = "0.34.0-rc.1", default-features = false }
+bevy_renet = { git = "https://github.com/lucaspoffo/renet", default-features = false }
 bevy = { version = "0.16", default-features = false, features = ["bevy_log"] }
 
 [dev-dependencies]
@@ -67,6 +67,6 @@ name = "tic_tac_toe"
 required-features = ["server", "client", "bevy_picking", "renet_netcode"]
 
 [patch.crates-io]
-bevy_replicon = { git = "https://github.com/ironpeak/bevy_replicon", rev = "cd6070690863865359c6d069c9b4e13586b6c31c" }
+bevy_replicon = { git = "https://github.com/ironpeak/bevy_replicon", rev = "8a876472cff09838f7588c442dceea441cf78b85" }
 bevy_renet = { git = "https://github.com/ironpeak/renet", rev = "cd33e4ed700b106eb64e380a9930cd47b737b610" }
 renet = { git = "https://github.com/ironpeak/renet", rev = "cd33e4ed700b106eb64e380a9930cd47b737b610" }
